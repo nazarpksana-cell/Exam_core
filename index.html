@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExamVault | Haari Codes</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f7f5ff;
+    color: #292342;
+}
+
+header {
+    background: #5636a5;
+    color: white;
+    padding: 20px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #e4d5ff;
+}
+
+header p {
+    font-size: 13px;
+}
+
+.hero {
+    text-align: center;
+    padding: 45px 15px;
+    background: linear-gradient(135deg, #5636a5, #8465d1);
+    color: white;
+}
+
+.hero h1 {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    color: #eee7ff;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.search-box {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 3px 15px #ddd5ee;
+    margin-top: -10px;
+}
+
+input, select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ded8ed;
+    border-radius: 8px;
+    outline: none;
+    background: white;
+    font-size: 14px;
+    color: #292342;
+}
+
+input:focus, select:focus {
+    border-color: #7954ca;
+}
+
+.search {
+    margin-bottom: 15px;
+}
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.section-title {
+    margin: 35px 0 18px;
+    font-size: 22px;
+}
+
+.paper-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.paper-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #eee8f8;
+    transition: 0.2s;
+}
+
+.paper-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 5px 15px #ddd5ee;
+}
+
+.paper-icon {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.paper-card h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.paper-card p {
+    color: #777;
+    font-size: 13px;
+    margin: 7px 0;
+}
+
+.tag {
+    display: inline-block;
+    background: #eee8ff;
+    color: #5636a5;
+    padding: 5px 9px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+button {
+    background: #6241b3;
+    color: white;
+    border: none;
+    padding: 11px 15px;
+    border-radius: 7px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+button:hover {
+    background: #43258e;
+}
+
+button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+.empty {
+    text-align: center;
+    padding: 35px;
+    color: #777;
+    grid-column: 1 / -1;
+}
+
+.question-card {
+    background: white;
+    padding: 17px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border-left: 4px solid #7954ca;
+}
+
+.question-card p {
+    margin: 8px 0;
+}
+
+footer {
+    background: #2e2051;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 45px;
+}
+
+footer p {
+    font-size: 13px;
+    margin: 5px;
+}
+
+@media(max-width: 600px) {
+    .filters {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 25px;
+    }
+
+    header {
+        justify-content: center;
+        text-align: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">📚 Exam<span>Vault</span></div>
+    <p>Powered by Haari_Codes 👩‍💻</p>
+</header>
+
+<section class="hero">
+    <h1>Find Your Previous Year Papers</h1>
+    <p>Search. Practice. Prepare. Succeed.</p>
+</section>
+
+<div class="container">
+
+    <section class="search-box">
+
+        <input
+            type="text"
+            id="search"
+            class="search"
+            placeholder="🔍 Search subject or paper..."
+            oninput="showPapers()"
+        >
+
+        <div class="filters">
+
+            <select id="university" onchange="showPapers()">
+                <option value="all">All Universities</option>
+                <option value="Calicut University">Calicut University</option>
+                <option value="KTU">KTU</option>
+            </select>
+
+            <select id="semester" onchange="showPapers()">
+                <option value="all">All Semesters</option>
+                <option value="S1">Semester 1</option>
+                <option value="S2">Semester 2</option>
+                <option value="S3">Semester 3</option>
+                <option value="S4">Semester 4</option>
+                <option value="S5">Semester 5</option>
+                <option value="S6">Semester 6</option>
+                <option value="S7">Semester 7</option>
+                <option value="S8">Semester 8</option>
+            </select>
+
+            <select id="year" onchange="showPapers()">
+                <option value="all">All Years</option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+            </select>
+
+        </div>
+    </section>
+
+    <h2 class="section-title">📄 Question Papers</h2>
+
+    <div class="paper-list" id="paperList"></div>
+
+    <h2 class="section-title">⭐ Important Questions</h2>
+
+    <div id="questions">
+
+        <div class="question-card">
+            <b>Software Engineering</b>
+            <p>1. Explain different levels of software testing.</p>
+            <p>2. Differentiate between forward engineering and reverse engineering.</p>
+            <p>3. Explain software maintenance.</p>
+        </div>
+
+        <div class="question-card">
+            <b>STLD</b>
+            <p>1. Explain the working of a multiplexer.</p>
+            <p>2. What are the different types of flip-flops?</p>
+            <p>3. Explain the design of a 4-bit arithmetic circuit.</p>
+        </div>
+
+        <div class="question-card">
+            <b>Data Structures</b>
+            <p>1. Explain BFS and DFS.</p>
+            <p>2. What is hashing? Explain hashing techniques.</p>
+            <p>3. Explain different sorting techniques.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <h3>ExamVault | Haari_Codes</h3>
+    <p>Learn • Practice • Build</p>
+    <p>Made for students ❤️</p>
+</footer>
+
+<script>
+
+// QUESTION PAPER DATABASE
+// Add actual PDF paths in the pdf property.
+
+const papers = [
+
+{
+    subject: "Software Engineering",
+    university: "Calicut University",
+    semester: "S3",
+    year: "2025",
+    code: "SE301",
+    pdf: ""
+},
+
+{
+    subject: "STLD",
+    university: "Calicut University",
+    semester: "S3",
+    year: "2024",
+    code: "STLD301",
+    pdf: ""
+},
+
+{
+    subject: "Data Structures",
+    university: "KTU",
+    semester: "S3",
+    year: "2025",
+    code: "CST201",
+    pdf: ""
+},
+
+{
+    subject: "Mathematics",
+    university: "KTU",
+    semester: "S1",
+    year: "2024",
+    code: "MAT101",
+    pdf: ""
+},
+
+{
+    subject: "Programming in C",
+    university: "Calicut University",
+    semester: "S1",
+    year: "2023",
+    code: "C101",
+    pdf: ""
+},
+
+{
+    subject: "Computer Architecture",
+    university: "Calicut University",
+    semester: "S3",
+    year: "2022",
+    code: "CA301",
+    pdf: ""
+}
+
+];
+
+// DISPLAY QUESTION PAPERS
+
+function showPapers() {
+
+    const search = document
+        .getElementById("search")
+        .value.toLowerCase();
+
+    const university = document
+        .getElementById("university").value;
+
+    const semester = document
+        .getElementById("semester").value;
+
+    const year = document
+        .getElementById("year").value;
+
+    const filtered = papers.filter(paper => {
+
+        return (
+            paper.subject.toLowerCase().includes(search) &&
+            (university === "all" ||
+                paper.university === university) &&
+            (semester === "all" ||
+                paper.semester === semester) &&
+            (year === "all" ||
+                paper.year === year)
+        );
+
+    });
+
+    const list = document.getElementById("paperList");
+
+    list.innerHTML = "";
+
+    if (filtered.length === 0) {
+        list.innerHTML = `
+            <div class="empty">
+                <h3>No papers found 😕</h3>
+                <p>Try another search or filter.</p>
+            </div>
+        `;
+        return;
+    }
+
+    filtered.forEach((paper, index) => {
+
+        const card = document.createElement("div");
+
+        card.className = "paper-card";
+
+        card.innerHTML = `
+            <div class="paper-icon">📄</div>
+
+            <h3>${paper.subject}</h3>
+
+            <p>🏛️ ${paper.university}</p>
+            <p>📚 ${paper.semester}</p>
+            <p>📅 ${paper.year}</p>
+            <p>🔖 ${paper.code}</p>
+
+            <span class="tag">Question Paper</span>
+
+            <br>
+
+            <button onclick="viewPaper(${index})">
+                View Paper
+            </button>
+
+            <button
+                onclick="downloadPaper(${index})"
+                ${paper.pdf ? "" : "disabled"}
+            >
+                Download PDF
+            </button>
+        `;
+
+        list.appendChild(card);
+
+    });
+
+}
+
+// VIEW PAPER
+
+function viewPaper(index) {
+
+    const filtered = getFilteredPapers();
+    const paper = filtered[index];
+
+    if (paper.pdf) {
+        window.open(paper.pdf, "_blank");
+    } else {
+        alert(
+            "PDF not uploaded yet!\n\n" +
+            "Subject: " + paper.subject +
+            "\nYear: " + paper.year +
+            "\nUniversity: " + paper.university
+        );
+    }
+
+}
+
+// GET FILTERED PAPERS
+
+function getFilteredPapers() {
+
+    const search = document
+        .getElementById("search")
+        .value.toLowerCase();
+
+    const university = document
+        .getElementById("university").value;
+
+    const semester = document
+        .getElementById("semester").value;
+
+    const year = document
+        .getElementById("year").value;
+
+    return papers.filter(paper => {
+
+        return (
+            paper.subject.toLowerCase().includes(search) &&
+            (university === "all" ||
+                paper.university === university) &&
+            (semester === "all" ||
+                paper.semester === semester) &&
+            (year === "all" ||
+                paper.year === year)
+        );
+
+    });
+
+}
+
+// DOWNLOAD PDF
+
+function downloadPaper(index) {
+
+    const filtered = getFilteredPapers();
+    const paper = filtered[index];
+
+    if (!paper || !paper.pdf) {
+        alert("PDF is not available.");
+        return;
+    }
+
+    const link = document.createElement("a");
+
+    link.href = paper.pdf;
+    link.download = "";
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+}
+
+// INITIAL DISPLAY
+
+showPapers();
+
+</script>
+
+</body>
+</html>
